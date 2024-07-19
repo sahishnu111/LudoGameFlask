@@ -1,0 +1,192 @@
+/* mainstyle.css */
+
+/* mainstyle.css */
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --card-background: #ffffff;
+  --hover-color: #e0e0e0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.heading-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.heading-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--secondary-color);
+  overflow: hidden;
+  animation: reveal 5s infinite;
+}
+
+@keyframes reveal {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+h1 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+#playerTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#playerTable th, #playerTable td {
+  padding: 1rem;
+  text-align: left;
+}
+
+#playerTable th {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#playerTable tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+#playerTable tr:hover {
+  background-color: var(--hover-color);
+  transition: background-color 0.3s ease;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#RollNumber {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0;
+  color: var(--primary-color);
+}
+
+#movePieceButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+#error-message {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .heading-text {
+    font-size: 3rem;
+  }
+
+  #playerTable th, #playerTable td {
+    padding: 0.75rem;
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+
+
+/* Add this to your existing CSS or update the existing styles */
+
+#board {
+    border: 1px solid #000;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    grid-template-rows: repeat(15, 40px);
+}
+
+.cell {
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.green { background-color: #90EE90; }
+.yellow { background-color: #FFFFE0; }
+.red { background-color: #FFB6C1; }
+.blue { background-color: #ADD8E6; }
+
+.piece {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    position: absolute;
+}
+
+.piece.red { background-color: #FF0000; }
+.piece.green { background-color: #008000; }
+.piece.blue { background-color: #0000FF; }
+.piece.yellow { background-color: #FFD700; }

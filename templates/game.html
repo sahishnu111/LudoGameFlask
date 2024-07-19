@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ludo GAME</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mainstyle.css') }}">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <p class="heading-text" data-text="LUDO GAME"> LUDO GAME </p>
+    <h1>Player List</h1>
+    <div id="error-message" style="display:none; color: red;"></div>
+    <table id="playerTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Player Piece (row,column)Index</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p id="RollNumber">Roll Number</p>
+    <div id="movePieceButtons"></div>
+    <div id="board"></div>
+    <script src="{{ url_for('static', filename='Mainscript.js') }}"></script>
+</body>
+</html>

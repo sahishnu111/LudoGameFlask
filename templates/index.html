@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludo Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a4e69;
+            --secondary-color: #9a8c98;
+            --accent-color: #c9ada7;
+            --background-color: #f2e9e4;
+            --text-color: #22223b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .heading-text {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heading-text::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background-size: 200% 200%;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: animate-gradient 5s ease infinite;
+        }
+
+        @keyframes animate-gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .input-container {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading-text" data-text="Ludo Game">Ludo Game</h1>
+
+        <div class="input-container">
+            <label for="numPlayers">Number of Players</label>
+            <input type="number" id="numPlayers" placeholder="Enter 2-4 players" min="2" max="4">
+        </div>
+
+        <button id="startGameBtn">Start Game</button>
+    </div>
+
+    <script>
+        async function startGame() {
+            try {
+                const numPlayers = document.getElementById("numPlayers").value;
+
+                if (numPlayers < 2 || numPlayers > 4) {
+                    alert("Please enter a number between 2 and 4.");
+                    return;
+                }
+
+                const response = await axios.post('/start_game', {
+                    numPlayers: numPlayers
+                });
+
+                if (response.status === 200) {
+                    const gameId = response.data.game_id;
+                    sessionStorage.setItem('gameId', gameId);
+                    window.location.href = '/game.html';
+                } else {
+                    console.error("Error starting game:", response.data.error);
+                    alert("Failed to start the game. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error starting game:", error);
+                alert("An error occurred while starting the game. Please try again.");
+            }
+        }
+
+        document.getElementById("startGameBtn").addEventListener('click', startGame);
+    </script>
+</body>
+</html>
